@@ -43,6 +43,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   async function handleGerar(){
+    event.preventDefault();
     setHidden(true);
     setLoading(true);
     const text = texto.replace(/[/]/g, '----');
@@ -70,6 +71,7 @@ function App() {
         <span>GERADOR DE QRCODE</span>
       </Navbar>
       <Body 
+        onSubmit={handleGerar}
         animate={{ y: 15, opacity: 1 }}
         transition={{ ease: 'easeOut', duration: 1 }} >
         <img 
@@ -82,9 +84,14 @@ function App() {
           value={texto}
           onChange={e => setTexto(e.target.value)}/>
 
-        <button onClick={handleGerar}>
+        <button type="submit">
           <FaQrcode className="icon"/>
-          GERAR QRCODE
+          {
+            loading?
+            "CARREGANDO"
+            :
+            "GERAR QRCODE"
+          }
         </button>
 
         {

@@ -49,7 +49,7 @@ export const Navbar = styled(motion.div)`
     }
 `;
 
-export const Body = styled(motion.div)`
+export const Body = styled(motion.form)`
     display: flex;
     flex-direction: column;
     align-items: center;
