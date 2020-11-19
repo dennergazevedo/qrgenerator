@@ -31,7 +31,7 @@ function App() {
 
   function handleGerar(){
     setHidden(false);
-    setExibir(true);
+    setExibir(texto);
   }
 
   return (
