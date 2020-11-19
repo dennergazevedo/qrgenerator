@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 
 // STYLED COMPONENTS
-
 import {
   Container,
   BackLeft,
@@ -18,6 +17,10 @@ import backright from './assets/img/backright.png';
 import logo from './assets/img/logo.png';
 import background from './assets/img/background.png';
 
+// LOTTIE
+import * as loadingLottie from './assets/json/loading.json';
+import Lottie from 'react-lottie';
+
 // ICONS
 import {
   FaQrcode
@@ -25,13 +28,30 @@ import {
 
 function App() {
 
+  const loadingOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loadingLottie.default,
+    rendererSettings:{
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
+
   const [texto, setTexto] = useState('');
   const [exibir, setExibir] = useState(false);
   const [hidden, setHidden] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  function handleGerar(){
-    setHidden(false);
-    setExibir(texto);
+  async function handleGerar(){
+    setHidden(true);
+    setLoading(true);
+    const text = texto.replace(/[/]/g, '----');
+    setExibir(text);
+
+    setTimeout(function(){
+      setHidden(false);
+      setLoading(false);
+    }, 3000)
   }
 
   return (
@@ -67,11 +87,20 @@ function App() {
           GERAR QRCODE
         </button>
 
+        {
+          loading?
+          <div>
+            <Lottie options={loadingOptions} height={'50px'} width={'50px'} />
+          </div>
+          :
+          null
+        }
+
         <QrCode 
           style={{visibility: `${hidden? 'hidden': 'visible'}`}}
           width="100px" 
           src={`https://vps-3922624.artcopias.com.br:1498/qr_code/${exibir}`} 
-          alt="QRCODE" 
+          alt="QRCODE"
           height="100px"/>
       </Body>
     </Container>
