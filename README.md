@@ -2,10 +2,6 @@
 
 Estilização feita com styled-components
 
-## Available Scripts
-
-In the project directory, you can run:
-
 ### `yarn start`
 
 Para inicializar em modo de desenvolvimento.\
